@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciador de Eventos</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Gerenciador de Eventos</h1>
+    </header>
+    <div class="criaevento">
+      <h2>Criar Novo Evento</h2>
+      <form id="createEventForm">
+        <label for="nomeEvento">Nome do Evento:</label>
+        <input type="text" id="nomeEvento" name="nomeEvento" placeholder="Nome do Evento" /><br />
+
+        <label for="dataInicio">Data Início:</label>
+        <input type="date" id="dataInicio" name="dataInicio"  required /><br />
+
+        <label for="horaInicio">Hora Início:</label>
+        <input type="time" id="horaInicio" name="horaInicio" required /><br />
+
+        <label for="dataFim">Data Fim:</label>
+        <input type="date" id="dataFim" name="dataFim" required /><br />
+
+        <label for="horaFim">Hora Fim:</label>
+        <input type="time" id="horaFim" name="horaFim" required /><br />
+
+        <button type="submit">Criar Evento</button>
+      </form>
+    </div>
+
+    <script>
+        document.getElementById('createEventForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+      
+            const nomeEvento = document.getElementById('nomeEvento').value;
+            const dataInicio = document.getElementById('dataInicio').value;
+            const horaInicio = document.getElementById('horaInicio').value;
+            const dataFim = document.getElementById('dataFim').value;
+            const horaFim = document.getElementById('horaFim').value;
+      
+            try {
+              const response = await fetch('api/criar-evento', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  nomeEvento,
+                  dataInicio,
+                  horaInicio,
+                  dataFim,
+                  horaFim
+                })
+              });
+              if (!response.ok) throw new Error('Erro ao criar evento');
+              const result = await response.json();
+              alert(result.message);
+              document.getElementById('createEventForm').reset();
+            } catch (error) {
+              console.error('Erro ao criar evento:', error);
+              alert('Erro ao criar evento');
+            }
+          });
+    </script>
+  </body>
+</html>

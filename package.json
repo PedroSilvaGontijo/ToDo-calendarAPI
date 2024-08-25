@@ -1,0 +1,23 @@
+{
+  "name": "todo-calendarapi",
+  "version": "1.0.0",
+  "description": "Projeto de um To Do, ligado com API do google calendar para exibir tarefas mensalmente e definir lembretes diários",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "author": "Pedro S. Gontijo",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "express": "^4.19.2",
+    "googleapis": "^105.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
